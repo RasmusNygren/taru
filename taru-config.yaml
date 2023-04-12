@@ -1,0 +1,43 @@
+jobs:
+  build-dev:
+    steps:
+      - cargo build
+      - chmod +x {{dev_bin_source}}
+      - cp {{dev_bin_source}} {{bin_output}}
+
+  build-release:
+    steps:
+      - cargo build --release
+      - chmod +x {{prod_bin_source}}
+      - cp {{prod_bin_source}} {{bin_output}}
+
+  build-release-all:
+    requires:
+      - build-release-x86-mac
+      - build-release-arm64-mac
+      # - build-release-x86-linux
+      # - build-release-arm64-linux
+    steps:
+      - echo 'Finished building all releases'
+
+  build-release-x86-mac:
+    steps:
+      - cargo build --release --target x86_64-apple-darwin
+
+  build-release-arm64-mac:
+    steps:
+      - cargo build --release --target aarch64-apple-darwin
+
+  build-release-x86-linux:
+    steps:
+      - cargo build --release --target x86_64-unknown-linux-gnu
+
+  build-release-arm64-linux:
+    steps:
+      - cargo build --release --target aarch64-unknown-linux-gnu
+
+
+variables:
+  bin_output: /opt/homebrew/bin/
+  dev_bin_source: ./target/debug/taru
+  prod_bin_source: ./target/release/taru
