@@ -1,6 +1,6 @@
 use crate::parser::{parse_jobs, Jobs};
-use crate::TaruError;
 use crate::Config;
+use crate::TaruError;
 
 pub fn process_job(job_name: &str, config: &Config) -> Result<(), TaruError> {
     let jobs = parse_jobs(&config.file_path)?;
@@ -42,7 +42,6 @@ fn get_shell_envvar_or_default(default: &str) -> String {
 ///
 /// * `TaruError` if any of the commands did not execute successfully.
 fn run_steps_in_job(steps: &Vec<String>) -> Result<(), TaruError> {
-
     let shell = get_shell_envvar_or_default("sh");
     for step in steps {
         let validated_cmd = std::process::Command::new(&shell)
@@ -58,7 +57,7 @@ fn run_steps_in_job(steps: &Vec<String>) -> Result<(), TaruError> {
 
     for step in steps {
         log::info!("Running step: {:?}", step);
-        
+
         let command = std::process::Command::new(&shell)
             .arg("-c")
             .arg(step)
@@ -79,7 +78,7 @@ fn run_steps_in_job(steps: &Vec<String>) -> Result<(), TaruError> {
 
 /// Fetches the key values for all jobs that has been identified in the YAML file.
 ///
-/// # Arguments 
+/// # Arguments
 ///
 /// * `file_path` The path to the YAML file.
 ///

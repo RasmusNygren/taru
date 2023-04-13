@@ -46,7 +46,10 @@ pub struct Config {
 
 fn get_run_config(run_obj: &Run) -> Config {
     let file_path = get_yaml_path(run_obj.file_path.as_ref());
-    Config { file_path, quiet_mode: run_obj.quiet_mode }
+    Config {
+        file_path,
+        quiet_mode: run_obj.quiet_mode,
+    }
 }
 
 fn get_yaml_path<T: AsRef<str>>(file_path: Option<T>) -> String {
@@ -57,7 +60,6 @@ fn get_yaml_path<T: AsRef<str>>(file_path: Option<T>) -> String {
     };
     file_path
 }
-
 
 fn main() {
     match try_main() {
@@ -84,7 +86,11 @@ fn try_main() -> Result<(), errors::TaruError> {
             if config.quiet_mode {
                 level = log::LevelFilter::Warn;
             }
-            simple_logger::SimpleLogger::new().without_timestamps().with_level(level).init().unwrap();
+            simple_logger::SimpleLogger::new()
+                .without_timestamps()
+                .with_level(level)
+                .init()
+                .unwrap();
             process_job(&run.job_name, &config)?;
             Ok(())
         }

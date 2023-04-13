@@ -1,5 +1,5 @@
 # Taru - local workflow runner
-Taru is a simple local-first workflow-runner for unix-based systems. 
+Taru is a simple local-first workflow-runner for unix-based systems.
 Taru is designed to replace the need for makefiles, shell scripts and bash aliases to store and manage
 local tasks and workflows.
 The configuration is specified through YAML files,
@@ -9,18 +9,18 @@ and allows for the execution of any shell commands that can be run in your local
 
 ## Features
 - Workflow configuration using YAML with support for injecting:
-    - User-defined variables 
-    - Environment variables 
+    - User-defined variables
+    - Environment variables
 
 - Specify multi-depth job dependencies.
 
 ## Installation
-Running the application requires Rust to be installed on your system and the 
-installation guide requires the Cargo 
+Running the application requires Rust to be installed on your system and the
+installation guide requires the Cargo
 package manager to be accessible on your `PATH`.
 
 ### Building using Cargo
-Run 
+Run
 ```bash
 cargo install --git https://github.com/RasmusNygren/taru taru
 ```
@@ -47,15 +47,15 @@ Options:
 The YAML schema currently supports `jobs` and `variables` as top-level keywords.
 #### `jobs`
 Each job is specified with a name and must include a `steps` parameter where each step
-must correspond to a valid shell command, but a command can also include variables 
-if they are specified in the `variables` section. Variables are referred to by specifying the key value 
+must correspond to a valid shell command, but a command can also include variables
+if they are specified in the `variables` section. Variables are referred to by specifying the key value
 inside double brackets e.g. `{{variable_name}}`
 
 Each job also accepts
 `requires` as an optional parameter to specify dependencies. `requires` only accepts other jobs as depdendencies
 and thus only other job names are valid values.
 #### `variables`
-Variables are optional and are specified using 
+Variables are optional and are specified using
 `key: value` syntax.
 
 
@@ -77,4 +77,3 @@ variables:
   bin_output: /opt/homebrew/bin/
   bin_source: ./target/debug/taru
 ```
-

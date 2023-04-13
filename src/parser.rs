@@ -26,7 +26,7 @@ struct BaseSchema {
 
 /// Variable entries in the YAML that refers to an environment variable are replaced
 /// with the corresponding value for that environment variable.
-/// 
+///
 /// # Examples
 ///
 /// If the environment variable SHELL=/bin/zsh then
@@ -57,7 +57,7 @@ where
 ///
 /// # Examples
 ///
-/// A job step command: 
+/// A job step command:
 ///     ls {{tmp_dir}}
 /// A varaible map:
 ///     tmp_dir: /tmp
