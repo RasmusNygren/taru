@@ -6,7 +6,7 @@ description = "A simple local workflow runner for unix-based systems."
 readme = "README.md"
 homepage = "https://github.com/RasmusNygren/taru"
 keywords = ["workflow", "task", "automate"]
-categores = ["command-line-utilities", "development-tools::build-utils"]
+categories = ["command-line-utilities", "development-tools::build-utils"]
 license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
