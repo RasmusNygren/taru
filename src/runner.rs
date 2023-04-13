@@ -91,3 +91,77 @@ pub fn get_job_names(file_path: &str) -> Result<Vec<String>, TaruError> {
     let vec: Vec<String> = jobs.into_keys().collect();
     Ok(vec)
 }
+
+#[cfg(test)]
+mod tests {
+    use std::collections::HashMap;
+
+    use crate::parser::Job;
+
+    use super::*;
+    #[test]
+    fn single_element_valid_steps_vector_does_not_error() {
+        let steps = vec!["ls".to_string()];
+        let res = run_steps_in_job(&steps);
+        assert!(res.is_ok())
+    }
+
+    #[test]
+    fn single_element_invalid_steps_vector_does_error() {
+        // Invalid linux command supplied to step vector.
+        let steps = vec!["lllll".to_string()];
+        let res = run_steps_in_job(&steps);
+        assert!(res.is_err())
+    }
+
+    #[test]
+    fn empty_steps_vector_is_valid() {
+        let steps = vec![];
+        let res = run_steps_in_job(&steps);
+        assert!(res.is_ok())
+    }
+
+    #[test]
+    fn multiple_elements_valid_steps_vector_does_not_error() {
+        // Invalid linux command supplied to step vector.
+        let steps = vec!["ls".to_string(), "pwd".to_string(), "whoami".to_string()];
+        let res = run_steps_in_job(&steps);
+        assert!(res.is_ok())
+    }
+
+    #[test]
+    fn multiple_elements_invalid_steps_vector_does_error() {
+        // Invalid linux command supplied to step vector.
+        let steps = vec![
+            "ls".to_string(),
+            "invalidcommand".to_string(),
+            "whoami".to_string(),
+        ];
+        let res = run_steps_in_job(&steps);
+        assert!(res.is_err())
+    }
+
+    #[test]
+    fn run_job_valid_does_not_error() {
+        let steps = vec!["ls".to_string(), "pwd".to_string(), "whoami".to_string()];
+        let job = Job {
+            steps,
+            prerequisites: vec![],
+        };
+        let jobs: HashMap<String, Job> = HashMap::from([("job_one".to_owned(), job)]);
+        let res = run_job("job_one", &jobs);
+        assert!(res.is_ok())
+    }
+
+    #[test]
+    fn run_non_existing_job_does_error() {
+        let steps = vec!["ls".to_string(), "pwd".to_string(), "whoami".to_string()];
+        let job = Job {
+            steps,
+            prerequisites: vec![],
+        };
+        let jobs: HashMap<String, Job> = HashMap::from([("job_one".to_owned(), job)]);
+        let res = run_job("invalid_job_name", &jobs);
+        assert!(res.is_err())
+    }
+}
