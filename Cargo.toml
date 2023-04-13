@@ -2,9 +2,10 @@
 name = "taru"
 version = "0.1.0"
 edition = "2021"
-description = "A simple local workflow runner for unix-based systems."
+description = "A simple local-first workflow runner for unix-based systems."
 readme = "README.md"
 homepage = "https://github.com/RasmusNygren/taru"
+repository = "https://github.com/RasmusNygren/taru"
 keywords = ["workflow", "task", "automate"]
 categories = ["command-line-utilities", "development-tools::build-utils"]
 license = "MIT"
