@@ -69,7 +69,7 @@ where
 fn inject_variables_into_jobs(jobs: &Jobs, variables: &Variables) -> Jobs {
     let mut injected_jobs = jobs.clone();
     for (_, job) in injected_jobs.iter_mut() {
-        let re = Regex::new(r"\{\{ *?(\w+?) *?\}\}").unwrap();
+        let re = Regex::new(r"\{ *?(\w+?) *?\}").unwrap();
         for step in job.steps.iter_mut() {
             let res = re.replace_all(step, |caps: &Captures| {
                 format!(

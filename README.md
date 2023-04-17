@@ -53,7 +53,7 @@ The YAML schema currently supports `jobs` and `variables` as top-level keywords.
 Each job is specified with a name and must include a `steps` parameter where each step
 must correspond to a valid shell command, but a command can also include variables
 if they are specified in the `variables` section. Variables are referred to by specifying the key value
-inside double brackets e.g. `{{variable_name}}`
+inside single brackets e.g. `{variable_name}`
 
 Each job also accepts
 `requires` as an optional parameter to specify dependencies. `requires` only accepts other jobs as depdendencies
@@ -71,8 +71,8 @@ jobs:
       - dependency
     steps:
       - cargo build
-      - chmod +x {{bin_source}}
-      - cp {{bin_source}} {{bin_output}}
+      - chmod +x {bin_source}
+      - cp {bin_source} {bin_output}
   dependency:
     steps:
       - echo 'This is a dependency and should run first'

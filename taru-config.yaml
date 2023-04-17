@@ -2,14 +2,14 @@ jobs:
   build-dev:
     steps:
       - cargo build
-      - chmod +x {{dev_bin_source}}
-      - cp {{dev_bin_source}} {{bin_output}}
+      - chmod +x {dev_bin_source}
+      - cp {dev_bin_source} {bin_output}
 
   build-release:
     steps:
       - cargo build --release
-      - chmod +x {{prod_bin_source}}
-      - cp {{prod_bin_source}} {{bin_output}}
+      - chmod +x {prod_bin_source}
+      - cp {prod_bin_source} {bin_output}
 
   build-release-all:
     requires:
