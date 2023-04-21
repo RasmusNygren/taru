@@ -3,7 +3,7 @@
 ![Build status](https://github.com/RasmusNygren/taru/actions/workflows/main.yml/badge.svg)
 
 Taru is a simple local-first workflow-runner for unix-based systems.
-Taru is designed to replace the need for makefiles, shell scripts and bash aliases to store and manage
+Taru is designed as an alternative to makefiles, shell scripts and bash aliases to store and manage
 local tasks and workflows.
 The configuration is specified through YAML files,
 and allows for the execution of any shell commands that can be run in your local shell environment.
