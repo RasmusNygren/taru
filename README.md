@@ -33,6 +33,15 @@ Assuming that your cargo `bin` directory is on your path you
 can now invoke the Taru cli through `taru`.
 
 
+### Using homebrew
+Taru is available via the `rasmusnygren/taru` tap.
+
+Run
+```shell
+brew tap rasmusnygren/taru
+brew install taru
+```
+
 ## Using Taru
 ```shell
 Usage: taru <COMMAND>
