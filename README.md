@@ -75,18 +75,26 @@ Variables are optional and are specified using
 ## Examples:
 ```yaml
 jobs:
-  build-dev:
+  authenticate-docker-with-aws:
+    steps:
+      - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin {aws_uri}
+
+  build-lambda-amd64:
     requires:
-      - dependency
+      - authenticate-docker-with-aws
     steps:
-      - cargo build
-      - chmod +x {bin_source}
-      - cp {bin_source} {bin_output}
-  dependency:
+      - docker buildx build --platform linux/amd64 -t {aws_image_tag} .
+      - docker tag {aws_image_tag} {aws_uri}/{aws_image_tag}
+      - docker push {aws_uri}/{aws_image_tag}
+      - aws lambda update-function-code --region eu-north-1 --function-name scrape-backend-api --image-uri {aws_uri}/{aws_image_tag} --architecture=x86_64
+
+  run-local:
     steps:
-      - echo 'This is a dependency and should run first'
+      uvicorn --reload src/api:app
+
+
 
 variables:
-  bin_output: /opt/homebrew/bin/
-  bin_source: ./target/debug/taru
+  aws_image_tag: scrape-ai:latest
+  aws_uri: 470712182115.dkr.ecr.eu-north-1.amazonaws.com
 ```
