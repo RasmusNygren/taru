@@ -71,6 +71,11 @@ and thus only other job names are valid values.
 Variables are optional and are specified using
 `key: value` syntax.
 
+Variables can reference environment variables by prefixing the environment variable name with `env.`.
+For example, the `SHELL` environment variable can be assigned to the variable name `shell` using the syntax
+
+`shell: env.SHELL`
+
 
 ## Examples:
 ```yaml
@@ -90,6 +95,7 @@ jobs:
 
   run-local:
     steps:
+      echo 'Running local server as {user}.'
       uvicorn --reload src/api:app
 
 
@@ -97,4 +103,5 @@ jobs:
 variables:
   aws_image_tag: scrape-ai:latest
   aws_uri: 470712182115.dkr.ecr.eu-north-1.amazonaws.com
+  user: env.USER
 ```
