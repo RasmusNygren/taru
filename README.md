@@ -102,6 +102,6 @@ jobs:
 
 variables:
   aws_image_tag: scrape-ai:latest
-  aws_uri: 470712182115.dkr.ecr.eu-north-1.amazonaws.com
+  aws_uri: aws_account_id.dkr.ecr.eu-north-1.amazonaws.com
   user: env.USER
 ```
